@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LINE Seed subset example</title>
+    <link href="./style.css" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: LINESeedJPStd;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+      a {
+        color: #f09;
+      }
+      .header h1 {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 1.3;
+        padding-bottom: 10px;
+      }
+      .app {
+        padding: 0 10px;
+      }
+      .app > section {
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+      }
+      .exWeight {
+        color: #777;
+      }
+      .exInput {
+        appearance: none;
+        display: block;
+        width: 100%;
+        font-family: inherit;
+        font-size: 64px;
+        line-height: 1.5;
+        background: none;
+        border: none;
+        border-radius: 0;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+      .exInput:focus {
+        background-color: #f9f9f9;
+      }
+      .glyphs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1px;
+        background-size: 65px 65px;
+        background-image: linear-gradient(to left, #ccc 1px, transparent 1px),
+          linear-gradient(to top, #ccc 1px, transparent 1px);
+      }
+      .glyph {
+        font-size: 32px;
+        line-height: 64px;
+        width: 64px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/preact@10.11.2/dist/preact.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preact@10.11.2/hooks/dist/hooks.umd.js"></script>
+    <script>
+      const letters =
+        "!\"#$%&'()*+,‑-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[¥]^̲_ˋ̀`abcdefghijklmnopqrstuvwxyz{¦}˜̃ʼ’\ʻ‘|~∼、。，．・：；？！゛゜´｀¨＾￣＿ヽヾゝゞ〃仝々〆〇ー―‐／＼〜～‖｜…‥（）〔〕［］｛｝〈〈〉〉《》「」『』【】＋−－±×÷＝≠＜＞≦≧∞∴♂♀°′″℃￥＄￠￡％＃＆＊＠§☆★○●◎◇◆□■△▲▽▼※〒→↑←↓↑←↓→〓∈∋⊆⊇⊂⊃∪∩∧∨￢⇒⇔∀∃∠⊥⌒∂∇≡≒≪≫√∽∝∵∫∬Å‰♯♭♪†‡¶◯０１２３４５６７８９ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶ亜安以宇衣於加幾久計己左之寸世曽太知川天止奈仁奴祢乃波比不部保末美武女毛也由与良利留礼呂和為恵遠无";
+      (function ({ render, h }, { useEffect, useId, useState, useMemo }) {
+        const App = () => {
+          const [exText, setExText] = useState(
+            "シンプルでフレンドリーな日本語フォント"
+          );
+          return h(
+            "article",
+            { className: "app" },
+            h(
+              "section",
+              { className: "header" },
+              h("h1", {}, "LINE Seed subset example"),
+              h(
+                "p",
+                {},
+                'フォント "LINE Seed" のサブセットサンプルです。(公式ではありません)'
+              ),
+              h("p", {}, "ライセンスについては公式サイトをご確認ください。"),
+              h(
+                "p",
+                {},
+                h("a", { href: "https://seed.line.me/" }, "LINE Seed")
+              ),
+              h(
+                "p",
+                {},
+                h(
+                  "a",
+                  { href: "https://github.com/mochiya98/lineseed-web-subset" },
+                  "GitHub - mochiya98/lineseed-web-subset"
+                )
+              )
+            ),
+            h(
+              "section",
+              { className: "examples" },
+              [
+                ["Thin", 100],
+                ["Regular", 300],
+                ["Bold", 600],
+                ["ExtraBold", 800],
+              ].map(([weightName, weight]) =>
+                h(
+                  "div",
+                  { key: weightName, className: "example" },
+                  h(
+                    "div",
+                    { className: "exWeight" },
+                    `${weightName} ${weight}`
+                  ),
+                  h(
+                    "div",
+                    { className: "exInputBox" },
+                    h("input", {
+                      type: "text",
+                      className: "exInput",
+                      style: { fontWeight: weight },
+                      onInput: (e) => {
+                        setExText(e.currentTarget.value);
+                      },
+                      value: exText,
+                    })
+                  )
+                )
+              )
+            ),
+            h(
+              "section",
+              {},
+              h(
+                "div",
+                { className: "glyphs" },
+                [...letters].map((c, i) =>
+                  h("div", { key: `g${i}`, className: "glyph" }, c)
+                )
+              )
+            )
+          );
+        };
+        render(h(App), document.body);
+      })(preact, preactHooks);
+    </script>
+  </body>
+</html>
